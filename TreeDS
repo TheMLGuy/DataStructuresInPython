@@ -1,0 +1,78 @@
+'''
+Created on Jul 7, 2017
+
+@author: Ashwin
+'''
+
+class aboutTree(object):
+    #defining methods to create a node with its data and left,right pointers; also methods
+    #to interact with left/right pointers
+    def __init__(self,data):
+        self.data=data
+        self.left=None
+        self.right=None
+    def getData(self):
+        return self.data
+    def getRight(self):
+        return self.right
+    def getLeft(self):
+        return self.left
+    def setData(self,data):
+        self.data=data
+    #def insertIntoBinaryTree(self,l):
+        #'l' is a list of numbers which needs to be inserted into the tree
+        # the property of balancing the binary tree needs to be handled
+        #left subtree < root< right subtree    
+        
+    def insertIntoBinaryTree(self,dataToBeInserted):
+        
+        if self.data<dataToBeInserted:
+            if self.right==None:
+                self.right=aboutTree(dataToBeInserted)
+            else:
+                self.right.insertIntoBinaryTree(dataToBeInserted)
+        else:
+            if self.left==None:
+                self.left=aboutTree(dataToBeInserted)
+            else:
+                self.left.insertIntoBinaryTree(dataToBeInserted)           
+            
+
+    def recursiveInorderTraversal(self,root):
+        #this function gets the parent of the node described by data
+        #traversedList=[]
+        
+        if not root:
+            return
+        node=root
+        self.recursiveInorderTraversal(node.left)
+        print(node.data)
+        self.recursiveInorderTraversal(node.right)
+        
+    def nonRecursiveInorderTraversal(self,root):
+        if not root:
+            return
+        stack=[]
+        node=root
+        temp=[]
+        while stack or node:
+            if node:
+                stack.append(node)
+                node=node.left
+            else:
+                node=stack.pop()
+                temp.append(node.data)
+                node=node.right    
+        return temp    
+                
+        
+root=aboutTree(4)
+root.insertIntoBinaryTree(5)
+root.insertIntoBinaryTree(2)
+root.insertIntoBinaryTree(1)
+root.insertIntoBinaryTree(0)
+root.insertIntoBinaryTree(7)
+print("Recursive Inorder Traversal\n*******************")
+print(root.recursiveInorderTraversal(root))       
+print("Non Recursive Inorder Traversal\n*******************")
+print(root.nonRecursiveInorderTraversal(root)) 
