@@ -225,6 +225,26 @@ class aboutTree(object):
             return 0
         return max(self.findHeight(root.left), self.findHeight(root.right))+1
 
+
+    def sumFromRootToLeaf(self,root,sum,result):
+        if root==None:
+            return False
+        if root.left==None and root.right==None:
+            if root.data==sum:
+                result.append(root.data)
+                return True
+            else:
+                return False
+        if (self.sumFromRootToLeaf(root.left,sum-root.data,result)):
+            result.append(root.data)
+            return True
+        if (self.sumFromRootToLeaf(root.right, sum-root.data, result)):
+            result.append(root.data)
+            return True
+        return False
+        
+                 
+
 root=aboutTree(1)
 root.left=aboutTree(2)
 root.right=aboutTree(3)
@@ -255,4 +275,7 @@ root.right.right=aboutTree(7)
 #print("search using iterative method\n********")
 #print(root.searchRecursiveForData(root, 0))
 #print(root.sumOfLeftLeaves(root, False))
-print(root.findHeight(root))
+#print(root.findHeight(root))
+result=[]
+print(root.sumFromRootToLeaf(root, 7, result))
+print(result)
