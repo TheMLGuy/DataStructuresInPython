@@ -37,7 +37,7 @@ class aboutTree(object):
             else:
                 self.left.insertIntoBinaryTree(dataToBeInserted)           
             
-
+#root=aboutTree(5)
     def recursiveInorderTraversal(self,root):
         #this function gets the parent of the node described by data
         #traversedList=[]
@@ -65,7 +65,53 @@ class aboutTree(object):
                 node=node.right    
         return temp    
                 
+    def recursivePreOrderTraversal(self,root):
+        if not root:
+            return
+        node=root
+        print(node.data)
+        self.recursivePreOrderTraversal(node.left)
+        self.recursivePreOrderTraversal(node.right)
         
+    def nonRecursivePreOrderTraversal(self,root):
+        if not root:
+            return
+        node=root
+        stack=[]
+        stack.append(root)
+        result=[]
+        while stack:
+            node=stack.pop()
+            result.append(node.data)
+            if node.right: stack.append(node.right)
+            if node.left: stack.append(node.left) 
+        return result            
+    def recursivePostOrderTraversal(self,root):
+        node=root
+        if not node:
+            return
+        self.recursivePostOrderTraversal(node.left)
+        self.recursivePostOrderTraversal(node.right)
+        print(node.data)
+     
+    def nonRecursivePostOrderTraversal(self):
+        #2 stack approach
+        if not root:
+            return
+        s1=[]
+        s2=[]
+        s1.append(root)
+        while(s1!=[]):
+            node=s1.pop()
+            s2.append(node)
+            if node.left!=None:
+                s1.append(node.left)
+            if node.right!=None:
+                s1.append(node.right)
+        while s2!=[]:
+            node=s2.pop()
+            print(node.data)             
+                        
 root=aboutTree(4)
 root.insertIntoBinaryTree(5)
 root.insertIntoBinaryTree(2)
@@ -76,3 +122,11 @@ print("Recursive Inorder Traversal\n*******************")
 print(root.recursiveInorderTraversal(root))       
 print("Non Recursive Inorder Traversal\n*******************")
 print(root.nonRecursiveInorderTraversal(root)) 
+print("Non Recursive Preorder Traversal\n*******************")
+print(root.nonRecursivePreOrderTraversal(root))
+print("Recursive Preorder Traversal\n*******************")
+print(root.recursivePreOrderTraversal(root))
+print("Recursive Postorder traversal\n**************")
+print(root.recursivePostOrderTraversal(root))
+print("Non recursive postorder traversal")
+print(root.nonRecursivePostOrderTraversal())
