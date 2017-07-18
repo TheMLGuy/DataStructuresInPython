@@ -4,6 +4,7 @@ Created on Jul 7, 2017
 @author: Ashwin
 '''
 
+
 class aboutTree(object):
     #defining methods to create a node with its data and left,right pointers; also methods
     #to interact with left/right pointers
@@ -111,7 +112,32 @@ class aboutTree(object):
         while s2!=[]:
             node=s2.pop()
             print(node.data)             
-                        
+    class queue(object):
+        def __init__(self):
+            self.items=[]
+        def enque(self,item):
+            self.items.insert(0,item)
+        def deque(self):
+            self.items.pop()
+                    
+    def levelOrderTraversal(self,root):
+        #use queue to solve this problem
+        #queueobj=queue()
+        queue=[]
+        if not root:
+            return
+        node=root
+        queue.insert(0,node) 
+        while queue!=[]:
+            node=queue.pop()
+            print(node.data)
+            if node.left!=None:
+                queue.insert(0,node.left)
+            if node.right!=None:
+                queue.insert(0,node.right)
+            
+        
+        
 root=aboutTree(4)
 root.insertIntoBinaryTree(5)
 root.insertIntoBinaryTree(2)
@@ -130,3 +156,5 @@ print("Recursive Postorder traversal\n**************")
 print(root.recursivePostOrderTraversal(root))
 print("Non recursive postorder traversal")
 print(root.nonRecursivePostOrderTraversal())
+print("level order traversal\n*********")
+print(root.levelOrderTraversal(root))
