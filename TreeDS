@@ -3,7 +3,7 @@ Created on Jul 7, 2017
 
 @author: Ashwin
 '''
-
+#    https://gist.github.com/NahimNasser/4705371
 
 class aboutTree(object):
     #defining methods to create a node with its data and left,right pointers; also methods
@@ -136,25 +136,70 @@ class aboutTree(object):
             if node.right!=None:
                 queue.insert(0,node.right)
             
-        
-        
+    def maxElementInBinaryTree(self,root):
+        if not root:
+            return    
+        while root.right!=None:
+            root=root.right
+        return root.data    
+    def recursiveMaxElementInBinaryTree(self,root):
+        if root==None:
+            return -1
+        elif root.right==None:
+            return root.data
+        return self.recursiveMaxElementInBinaryTree(root.right)
+    
+    def searchIterativeForData(self,root,data):
+        if root==None:
+            return False
+        queue=[]
+        node=root
+        queue.insert(0, root)
+        while queue!=[]:
+            node=queue.pop()
+            if node.data==data:
+                
+                return True
+            if node.left!=None:
+                queue.insert(0,node.left)
+            if node.right!=None:
+                queue.insert(0, node.right)
+        return False            
+                
+    def searchRecursiveForData(self,root,data):    
+        if root==None:
+            return False
+        elif root.data==data:
+            return True
+        else:
+            if root.data>data:
+                temp=self.searchRecursiveForData(root.left, data)
+            else:
+                temp=self.searchRecursiveForData(root.right, data)
+            if temp==True:
+                return True
+            else: return False    
 root=aboutTree(4)
 root.insertIntoBinaryTree(5)
 root.insertIntoBinaryTree(2)
 root.insertIntoBinaryTree(1)
 root.insertIntoBinaryTree(0)
 root.insertIntoBinaryTree(7)
-print("Recursive Inorder Traversal\n*******************")
-print(root.recursiveInorderTraversal(root))       
-print("Non Recursive Inorder Traversal\n*******************")
-print(root.nonRecursiveInorderTraversal(root)) 
-print("Non Recursive Preorder Traversal\n*******************")
-print(root.nonRecursivePreOrderTraversal(root))
-print("Recursive Preorder Traversal\n*******************")
-print(root.recursivePreOrderTraversal(root))
-print("Recursive Postorder traversal\n**************")
-print(root.recursivePostOrderTraversal(root))
-print("Non recursive postorder traversal")
-print(root.nonRecursivePostOrderTraversal())
-print("level order traversal\n*********")
-print(root.levelOrderTraversal(root))
+#print("Recursive Inorder Traversal\n*******************")
+#print(root.recursiveInorderTraversal(root))       
+#print("Non Recursive Inorder Traversal\n*******************")
+#print(root.nonRecursiveInorderTraversal(root)) 
+#print("Non Recursive Preorder Traversal\n*******************")
+#print(root.nonRecursivePreOrderTraversal(root))
+#print("Recursive Preorder Traversal\n*******************")
+#print(root.recursivePreOrderTraversal(root))
+#print("Recursive Postorder traversal\n**************")
+#print(root.recursivePostOrderTraversal(root))
+#print("Non recursive postorder traversal")
+#print(root.nonRecursivePostOrderTraversal())
+#print("level order traversal\n*********")
+#print(root.levelOrderTraversal(root))
+#print("Max element in tree\n**********")
+#print(root.recursiveMaxElementInBinaryTree(root))
+print("search using iterative method\n********")
+print(root.searchRecursiveForData(root, 0))
