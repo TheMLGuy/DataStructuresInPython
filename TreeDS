@@ -3,8 +3,8 @@ Created on Jul 7, 2017
 
 @author: Ashwin
 '''
-
-
+#    https://gist.github.com/NahimNasser/4705371
+import sys
 class aboutTree(object):
     #defining methods to create a node with its data and left,right pointers; also methods
     #to interact with left/right pointers
@@ -266,15 +266,45 @@ class aboutTree(object):
                 if node.right!=None:
                     q1.insert(0,node.right)
             print("\n")            
-                                      
+    
+    def countLeaves(self,root):
+        if root.left==None and root.right==None:
+            return 1
+        return self.countLeaves(root.left)+self.countLeaves(root.right)
+            
+    def countLeavesIterative(self,root):
+        if not root:
+            return 0
+        q=[]
+        node=root
+        cnt=0
+        q.insert(0,node)
+        while q!=[]:
+            t=q.pop()
+            if t.left==None and t.right==None:
+                cnt+=1
+            if t.left!=None:
+                q.insert(0,t.left)
+            if t.right!=None:
+                q.insert(0,t.right)
+        return cnt                
+    
+    def isValidBST(self,root,max,min):
+        if root==None:
+            return True
+        if root.data<=min or root.data>max:
+            return False
+        return self.isValidBST(root.left,root.data,min) and self.isValidBST(root.right, max,root.data)
+        
+        
 
-root=aboutTree(1)
-root.left=aboutTree(2)
-root.right=aboutTree(3)
-root.left.left=aboutTree(4)
-root.left.right=aboutTree(5)
-root.right.left=aboutTree(6)
-root.right.right=aboutTree(7)
+root=aboutTree(10)
+root.left=aboutTree(10)
+root.right=aboutTree(19)
+root.left.left=aboutTree(-5)
+#root.left.right=aboutTree(5)
+root.right.left=aboutTree(17)
+root.right.right=aboutTree(21)
 
 
 
@@ -302,5 +332,8 @@ root.right.right=aboutTree(7)
 #result=[]
 #print(root.sumFromRootToLeaf(root, 7, result))
 #print(result)
-print("level by level printing")
-print(root.levelBylevelPrinting(root))
+#print("level by level printing")
+#print(root.levelBylevelPrinting(root))
+#print(root.countLeaves(root))
+#print(root.countLeavesIterative(root))
+print(root.isValidBST(root, sys.maxsize, -sys.maxsize))
