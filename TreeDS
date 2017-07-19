@@ -3,7 +3,7 @@ Created on Jul 7, 2017
 
 @author: Ashwin
 '''
-#    https://gist.github.com/NahimNasser/4705371
+
 
 class aboutTree(object):
     #defining methods to create a node with its data and left,right pointers; also methods
@@ -243,7 +243,30 @@ class aboutTree(object):
             return True
         return False
         
-                 
+    def levelBylevelPrinting(self,root):   
+        if not root:
+            return
+        q1=[]
+        q2=[]
+        q1.insert(0,root)
+        while (q1!=[] or q2!=[]):
+            while q1!=[]:
+                node=q1.pop()
+                print(node.data,end=' ')
+                if node.left!=None:
+                    q2.insert(0,node.left)
+                if node.right!=None:
+                    q2.insert(0,node.right)
+            print("\n")
+            while q2!=[]:
+                node=q2.pop()
+                print(node.data,end=' ')
+                if node.left!=None:
+                    q1.insert(0,node.left)
+                if node.right!=None:
+                    q1.insert(0,node.right)
+            print("\n")            
+                                      
 
 root=aboutTree(1)
 root.left=aboutTree(2)
@@ -276,6 +299,8 @@ root.right.right=aboutTree(7)
 #print(root.searchRecursiveForData(root, 0))
 #print(root.sumOfLeftLeaves(root, False))
 #print(root.findHeight(root))
-result=[]
-print(root.sumFromRootToLeaf(root, 7, result))
-print(result)
+#result=[]
+#print(root.sumFromRootToLeaf(root, 7, result))
+#print(result)
+print("level by level printing")
+print(root.levelBylevelPrinting(root))
