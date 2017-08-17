@@ -3,7 +3,7 @@ Created on Jul 7, 2017
 
 @author: Ashwin
 '''
-#    https://gist.github.com/NahimNasser/4705371
+
 import sys
 class aboutTree(object):
     #defining methods to create a node with its data and left,right pointers; also methods
@@ -295,8 +295,17 @@ class aboutTree(object):
         if root.data<=min or root.data>max:
             return False
         return self.isValidBST(root.left,root.data,min) and self.isValidBST(root.right, max,root.data)
+    ### check if tree has a mirror
+    def checkIfMirror(self,tree1,tree2):
+        if tree1==None and tree2==None:
+            return True
+        if tree1.val==tree2.val:
+            return (self.checkIfMirror(tree1.left, tree2.right) and checkIfMirror(tree1.right, tree2.left))
         
-        
+        return False
+    def initiator(self, root):
+        return self.checkIfMirror(root,root)    
+    ###    
 
 root=aboutTree(10)
 root.left=aboutTree(10)
